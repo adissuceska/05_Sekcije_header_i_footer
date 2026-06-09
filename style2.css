@@ -1,0 +1,224 @@
+/* =============================================================================
+   01. CSS VARIJABLE - (boje, razmaci, breakpointovi)
+   ============================================================================= */
+:root {
+    --primary-color: #2563eb;     /* Glavna plava boja (linkovi, dugmad) */
+    --secondary-color: #1e40af;   /* Tamnija plava (hover efekti) */
+    --accent-color: #f59e0b;      /* Narandžasta (cena) */
+    --text-dark: #1f2937;         /* Tamni tekst */
+    --text-light: #6b7280;        /* Svetli tekst */
+    --bg-light: #f8fafc;          /* Svetla pozadina */
+    --white: #ffffff;             /* Bela */
+    --border-radius: 8px;         /* Zaokruživanje uglova */
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); /* Senka za karte */
+    --transition: all 0.3s ease;  /* Glatke animacije */
+    
+    --container-max-width: 1200px; /* Maksimalna širina sadržaja */
+    --gap-sm: 1rem;               /* Mali razmak */
+    --gap-md: 2rem;               /* Srednji razmak */
+}
+
+/* =============================================================================
+   02. RESET I OSNOVNI STILOVI - (čisti početak)
+   ============================================================================= */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { 
+    font-family: system-ui, -apple-system, sans-serif; 
+    line-height: 1.6; 
+    color: var(--text-dark); 
+    background: var(--bg-light); 
+}
+ul { list-style: none; }
+a { text-decoration: none; color: inherit; }
+
+/* =============================================================================
+   03. HEADER - FLEXBOX (sticky navigacija, horizontalna na svim ekranima)
+   ============================================================================= */
+header { 
+    background: var(--white); 
+    box-shadow: var(--shadow); 
+    position: sticky; 
+    top: 0; 
+    z-index: 100; 
+}
+
+.navbar {
+    display: flex;                    /* FLEXBOX - ključno! */
+    align-items: center;
+    justify-content: space-between;   /* Razmak između grupa */
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    gap: var(--gap-md);
+}
+
+.brand h1 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+.primary-nav ul {
+    display: flex;        /* HORIZONTALNA NAVIGACIJA */
+    gap: var(--gap-md);
+    align-items: center;
+}
+
+.primary-nav a {
+    padding: 0.5rem 1rem;
+    border-radius: var(--border-radius);
+    transition: var(--transition);
+    white-space: nowrap;  /* REČI JEDNA DO DRUGE - KLJUČNO! */
+}
+
+.primary-nav a:hover, .primary-nav a:focus { 
+    background: var(--bg-light); 
+    color: var(--primary-color); 
+}
+
+.actions { display: flex; align-items: center; gap: 1rem; }
+
+.search {
+    display: flex; align-items: center; gap: 0.5rem;
+    padding: 0.5rem 1rem; 
+    border: 1px solid var(--text-light);
+    border-radius: var(--border-radius); 
+    font-size: 0.9rem;
+    color: var(--text-light); 
+    transition: var(--transition);
+}
+
+.search img { width: 20px; height: 20px; }
+.search:hover { border-color: var(--primary-color); }
+
+.cart, .login, .signup { 
+    padding: 0.5rem 1rem; 
+    border-radius: var(--border-radius); 
+    transition: var(--transition); 
+    font-weight: 500; 
+}
+.login, .signup { background: var(--primary-color); color: var(--white); }
+.login:hover, .signup:hover { background: var(--secondary-color); }
+
+/* =============================================================================
+   04. MAIN - CSS GRID (proizvodi u responsivnoj mreži)
+   ============================================================================= */
+.products-grid {
+    display: grid; 
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* AUTO-FILL */
+    gap: var(--gap-md); 
+    max-width: var(--container-max-width);
+    margin: 2rem auto; 
+    padding: 0 2rem;
+}
+
+article {
+    background: var(--white); 
+    border-radius: var(--border-radius);
+    padding: 1.5rem; 
+    box-shadow: var(--shadow); 
+    transition: var(--transition);
+}
+
+article:hover { 
+    transform: translateY(-4px); 
+    box-shadow: 0 10px 25px -3px rgba(0, 0, 0, 0.2); 
+}
+
+article img { 
+    width: 100%; 
+    height: 200px; 
+    object-fit: cover; 
+    border-radius: var(--border-radius); 
+    margin-bottom: 1rem; 
+}
+article h2 { margin-bottom: 0.5rem; font-size: 1.25rem; }
+.price { font-size: 1.5rem; font-weight: bold; color: var(--accent-color); margin: 0.5rem 0; }
+
+button {
+    width: 100%; padding: 0.75rem; background: var(--primary-color);
+    color: var(--white); border: none; border-radius: var(--border-radius);
+    font-size: 1rem; font-weight: 500; cursor: pointer; transition: var(--transition);
+}
+button:hover { background: var(--secondary-color); }
+
+/* =============================================================================
+   05. FOOTER - CSS GRID + FLEX (organizovan u kolone)
+   ============================================================================= */
+footer { background: var(--text-dark); color: var(--white); margin-top: 4rem; }
+
+.footer-wrap {
+    max-width: var(--container-max-width); margin: 0 auto;
+    padding: 3rem 2rem 2rem;
+}
+
+.footer1 {
+    display: grid; 
+    grid-template-columns: repeat(3, 1fr); /* 3 KOLONE */
+    gap: var(--gap-md); margin-bottom: var(--gap-md);
+}
+.footer1 h3 { margin-bottom: 1rem; font-size: 1.1rem; font-weight: 600; }
+.footer1 ul { display: flex; flex-direction: column; gap: 0.5rem; }
+.footer1 a { padding: 0.25rem 0; transition: var(--transition); opacity: 0.8; }
+.footer1 a:hover, .footer1 a:focus { opacity: 1; color: var(--accent-color); }
+
+.footer2 {
+    display: flex; justify-content: space-between; align-items: center;
+    padding-top: 2rem; border-top: 1px solid var(--text-light);
+}
+.footer2 ul { display: flex; gap: 1rem; }
+.footer2 img { width: 24px; height: 24px; transition: var(--transition); }
+.footer2 a:hover img { transform: scale(1.1); }
+
+/* =============================================================================
+   06. RESPOZIVNOST - MEDIA QUERIES (prioritet: mobil prvo)
+   ============================================================================= */
+/* Tablet/Desktop prelaz */
+@media (max-width: 1024px) {
+    .navbar { padding: 1rem 1.5rem; }
+    .primary-nav a { padding: 0.4rem 0.8rem; font-size: 0.95rem; }
+}
+
+/* MOBIL - kompaktna horizontalna navigacija (ne prekriva sadržaj!) */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 0.75rem 1rem; gap: var(--gap-sm);
+        flex-direction: column; align-items: stretch;
+    }
+    
+    .primary-nav {
+        order: 3; display: flex !important;
+        flex-direction: row; overflow-x: auto;  /* Horizontal scroll ako treba */
+        padding: 0.5rem 0; margin-top: 0.5rem;
+        border-top: 1px solid #e5e7eb; border-bottom: 1px solid #e5e7eb;
+        gap: 0.25rem;
+    }
+    
+    .primary-nav ul { flex-direction: row; gap: 0.5rem; min-width: max-content; }
+    .primary-nav a {
+        padding: 0.5rem 0.75rem; white-space: nowrap;
+        font-size: 0.9rem; flex-shrink: 0;
+    }
+    
+    .brand { order: 1; flex: none; }
+    .actions {
+        order: 2; display: flex; justify-content: space-between;
+        flex-wrap: wrap; gap: 0.5rem; margin-top: 0.25rem;
+    }
+    .search { flex-shrink: 0; padding: 0.4rem 0.75rem; font-size: 0.85rem; }
+    
+    .products-grid { margin-top: 1rem; padding: 0 1rem; }
+    .footer1 { grid-template-columns: repeat(2, 1fr); }
+    .footer2 { flex-direction: column; gap: 1rem; text-align: center; }
+}
+
+/* Mali mobil */
+@media (max-width: 480px) {
+    .navbar { padding: 0.5rem 1rem; }
+    .brand h1 { font-size: 1.1rem; }
+    .primary-nav a { padding: 0.4rem 0.6rem; font-size: 0.85rem; }
+    .actions { flex-direction: row; gap: 0.25rem; }
+    .login, .signup, .cart { padding: 0.4rem 0.6rem; font-size: 0.85rem; }
+    .products-grid { grid-template-columns: 1fr; }
+    .footer1 { grid-template-columns: 1fr; text-align: center; }
+}
